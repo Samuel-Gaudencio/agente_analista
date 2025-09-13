@@ -47,10 +47,12 @@ python -m venv .venv
 4. Configure suas chaves:
 
 - Local (.env):
+
 ``GEMINI_API_KEY="sua_chave_gemini"
 GOOGLE_CREDENTIALS_JSON="credentials.json"``
 
-- Streamlit Cloud (Secrets)
+- Streamlit Cloud (Secrets):
+
 ``GEMINI_API_KEY="sua_chave_gemini"
 GOOGLE_CREDENTIALS_JSON='{
   "type": "service_account",
