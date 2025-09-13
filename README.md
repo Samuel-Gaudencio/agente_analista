@@ -48,13 +48,13 @@ python -m venv .venv
 
 - Local (.env):
 
-``GEMINI_API_KEY="sua_chave_gemini"
-GOOGLE_CREDENTIALS_JSON="credentials.json"``
+``GEMINI_API_KEY="sua_chave_gemini"``
+``GOOGLE_CREDENTIALS_JSON="credentials.json"``
 
 - Streamlit Cloud (Secrets):
 
-``GEMINI_API_KEY="sua_chave_gemini"
-GOOGLE_CREDENTIALS_JSON='{
+``GEMINI_API_KEY="sua_chave_gemini"``
+``GOOGLE_CREDENTIALS_JSON='{
   "type": "service_account",
   "project_id": "...",
   "private_key_id": "...",
