@@ -22,15 +22,28 @@ palm.configure(api_key=GEMINI_API_KEY)
 # =========================
 # 1. Conexão com Google Sheets
 # =========================
-def carregar_planilha(nome_planilha, aba, credenciais_json):
-    scope = ["https://spreadsheets.google.com/feeds",
-             "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(credenciais_json, scope)
-    client = gspread.authorize(creds)
-    sheet = client.open(nome_planilha).worksheet(aba)
-    data = sheet.get_all_records()
-    df = pd.DataFrame(data)
+def carregar_planilha(nome_planilha: str, aba: str, credenciais_json: str):
+    # Escopo necessário para acessar Google Sheets
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
+    # Detecta se está no Streamlit Cloud
+    if "google_credentials" in st.secrets:
+        # Pega as credenciais direto do secrets
+        credenciais_dict = dict(st.secrets["google_credentials"])
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(credenciais_dict, scope)
+    else:
+        # Usa arquivo local .json quando rodando localmente
+        creds = ServiceAccountCredentials.from_json_keyfile_name(credenciais_json, scope)
+
+    # Autentica e abre a planilha
+    cliente = gspread.authorize(creds)
+    planilha = cliente.open(nome_planilha)
+    worksheet = planilha.worksheet(aba)
+
+    # Converte os dados em dataframe
+    dados = worksheet.get_all_records()
+    import pandas as pd
+    df = pd.DataFrame(dados)
     return df
 
 
@@ -159,3 +172,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
