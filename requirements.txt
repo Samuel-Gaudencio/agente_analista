@@ -5,6 +5,6 @@ oauth2client
 langchain
 langchain-community
 langchain-google-genai
-chromadb
 google-generativeai
+faiss-cpu
 python-dotenv
