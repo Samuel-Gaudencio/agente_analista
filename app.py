@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 from oauth2client.service_account import ServiceAccountCredentials
 from langchain.docstore.document import Document
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import RetrievalQA
 from langchain.embeddings.base import Embeddings
@@ -90,7 +90,7 @@ class GeminiEmbeddings(Embeddings):
 # =========================
 def criar_vectorstore(documents):
     embeddings = GeminiEmbeddings()
-    vectorstore = Chroma.from_documents(documents, embeddings)
+    vectorstore = FAISS.from_documents(documents, embeddings)
     return vectorstore
 
 
@@ -172,4 +172,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
